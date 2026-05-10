@@ -22,9 +22,10 @@ public class AuthService(IUserRepository userRepository) : IAuthService
         return user;
     }
 
-    public bool Login(LoginRequest loginRequest)
+    public async Task<User> Login(string email, string password)
     {
-        
-        return true;
+        User? user = await userRepository.GetByEmail(email);
+        if (user == null || !PasswordHelper.Verify(password, user.Password)) throw new FailedLoginException("Invalid email or password");
+        return user;
     }
 }

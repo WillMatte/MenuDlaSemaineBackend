@@ -16,6 +16,7 @@ public class GlobalExceptionMapper : IExceptionHandler
             EmailFormatException e      => (StatusCodes.Status400BadRequest, e.Message),
             PasswordFormatException e   => (StatusCodes.Status400BadRequest, e.Message),
             DulplicateEmailException e  => (StatusCodes.Status409Conflict, e.Message),
+            FailedLoginException e      => (StatusCodes.Status400BadRequest, e.Message),
             _                           => (StatusCodes.Status500InternalServerError, "An unexpected error occurred")
         };
 
@@ -27,6 +28,6 @@ public class GlobalExceptionMapper : IExceptionHandler
             message
         }, cancellationToken);
 
-        return true; // true = exception is handled, stop propagation
+        return true;
     }
 }

@@ -6,5 +6,5 @@ namespace Backend.Application.Service.Interface;
 public interface IAuthService
 {
     Task<User> Signup(User user);
-    bool Login(LoginRequest loginRequest);
+    Task<User> Login(string email, string password);
 }

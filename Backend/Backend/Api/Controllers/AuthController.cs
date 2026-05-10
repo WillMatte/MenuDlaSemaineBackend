@@ -8,12 +8,14 @@ namespace Backend.Api.Controllers;
 
 [ApiController]
 [Route("auth")]
-public class AuthController(IAuthService authService) : ControllerBase
+public class AuthController(IAuthService authService, IJwtService jwtService) : ControllerBase
 {
     [HttpPost("login")]
-    public IActionResult Login(LoginRequest loginRequest)
+    public async Task<IActionResult> Login(LoginRequest loginRequest)
     {
-        return Ok();
+        User user = await authService.Login(loginRequest.Email, loginRequest.Password);
+        var token = jwtService.GenerateToken(user);
+        return Ok(new { token });
     }
 
     [HttpPost("signup")]
