@@ -13,11 +13,13 @@ public class GlobalExceptionMapper : IExceptionHandler
     {
         var (statusCode, message) = exception switch
         {
-            EmailFormatException e      => (StatusCodes.Status400BadRequest, e.Message),
-            PasswordFormatException e   => (StatusCodes.Status400BadRequest, e.Message),
-            DulplicateEmailException e  => (StatusCodes.Status409Conflict, e.Message),
-            FailedLoginException e      => (StatusCodes.Status400BadRequest, e.Message),
-            _                           => (StatusCodes.Status500InternalServerError, "An unexpected error occurred")
+            EmailFormatException e            => (StatusCodes.Status400BadRequest, e.Message),
+            PasswordFormatException e         => (StatusCodes.Status400BadRequest, e.Message),
+            DuplicateEntityException e        => (StatusCodes.Status409Conflict, e.Message),
+            FailedLoginException e            => (StatusCodes.Status400BadRequest, e.Message),
+            InvalidIngredientTypeException e  => (StatusCodes.Status400BadRequest, e.Message),
+            EntityNotFoundException e         => (StatusCodes.Status404NotFound, e.Message),
+            _                                 => (StatusCodes.Status500InternalServerError, "An unexpected error occurred")
         };
 
         context.Response.StatusCode = statusCode;

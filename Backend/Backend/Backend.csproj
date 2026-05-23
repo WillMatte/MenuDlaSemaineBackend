@@ -14,7 +14,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Api\Request\" />
       <Folder Include="Api\Response\" />
     </ItemGroup>
 

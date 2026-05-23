@@ -15,7 +15,7 @@ public class AuthService(IUserRepository userRepository) : IAuthService
     {
         EmailHelper.ValidateEmailFormat(user.Email);
         User? duplicateUser = await userRepository.GetByEmail(user.Email);
-        if (duplicateUser != null) throw new DulplicateEmailException("Email Already used");
+        if (duplicateUser != null) throw new DuplicateEntityException("Email Already used");
         PasswordHelper.ValidatePasswordFormat(user.Password);
         user.Password = PasswordHelper.HashPassword(user.Password);
         await userRepository.Create(user);

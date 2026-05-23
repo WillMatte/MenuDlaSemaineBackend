@@ -2,7 +2,6 @@ using Backend.Application.Service.Interface;
 using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 using Backend.Domain.Entities;
-using MongoDB.Bson;
 
 namespace Backend.Api.Controllers;
 
